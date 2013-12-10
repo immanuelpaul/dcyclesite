@@ -94,3 +94,11 @@ function dcycle_deploy_update_7017() {
 function dcycle_deploy_update_7018() {
   module_enable(array('timeago'));
 }
+
+/**
+ * don't use pathauto for users
+ */
+function dcycle_deploy_update_7019() {
+  // using pathauto for users, we end up with a WSOD during the test.
+  variable_set('pathauto_user_pattern', '');
+}
