@@ -1,3 +1,12 @@
 <?php
+/**
+ * @file
+ * dcycle_feature.features.inc
+ */
 
-// This file is deprecated and can be removed.
+/**
+ * Implements hook_views_api().
+ */
+function dcycle_feature_views_api() {
+  return array("api" => "3.0");
+}

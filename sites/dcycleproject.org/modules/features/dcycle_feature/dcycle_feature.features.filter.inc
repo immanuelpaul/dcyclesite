@@ -16,7 +16,7 @@ function dcycle_feature_filter_default_formats() {
     'name' => 'Markdown',
     'cache' => 1,
     'status' => 1,
-    'weight' => 0,
+    'weight' => -10,
     'filters' => array(
       'filter_markdown' => array(
         'weight' => 0,

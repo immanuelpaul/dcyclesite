@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the dcycle_feature feature.
  */
+
+include_once 'dcycle_feature.features.inc';
