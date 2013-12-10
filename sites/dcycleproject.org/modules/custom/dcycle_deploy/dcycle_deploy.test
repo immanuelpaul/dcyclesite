@@ -1,0 +1,73 @@
+<?php 
+/**
+ * @file
+ * This file contains the testing code for this module
+ */
+
+/**
+ * The test case
+ */
+class dcyclesiteTestCase extends DrupalWebTestCase {
+  /**
+   * Info for this test case.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('dcyclesite: basic test'),
+      'description' => t('describe test.'),
+      'group' => 'dcyclesite',
+    );
+  }
+
+  /*
+   * Enable your module
+   */
+  public function setUp() {
+    // set up a new site with default core modules, dcyclesite, and
+    // dependencies.
+    parent::setUp('dcycle_deploy');
+  }
+
+  /*
+   * Test case for dcyclesite.
+   */
+  public function testModule() {
+    $this->loginAsRole('administrator');
+    $blogs = array();
+    for ($i = 1; $i <= 5; $i++) {
+      $this->drupalCreateNode(array('type' => 'article', 'title' => 'É' . $blogs[$i] = $this->randomName()));
+      foreach (array('blog', 'node') as $base) {
+        $this->drupalGet($base . '/' . $i);
+        $this->assertUrl('blog/' . $i . '/e' . strtolower($blogs[$i]), array(), format_string('Blog can be accessed using @base/x and will redirect correctly.', array('@base' => $base)));
+      }
+    }
+  }
+
+  /*
+   * Login as administrator role.
+   *
+   * This can be a useful for tests in your deployment module, especially
+   * if you create several roles in a Feature dependency.
+   *
+   * @param $role = 'administrator'
+   *   Log in as any role, or administrator by default.
+   */
+  public function loginAsRole($role = 'administrator') {
+    // Get all of the roles in the system.
+    $roles = user_roles();
+    // Find the index for the role we want to assign to the user.
+    $index = array_search($role, $roles);
+    // Get the permissions for the role.
+    $permissions = user_role_permissions(array(array_search($role, $roles) => $role));
+    // Create the user with the permissions.
+    $user = $this->drupalCreateUser(array_keys($permissions[$index]));
+    // Assign the role.
+    $user->roles[$index] = $role;
+    // Log in as this user
+    if (!($user = user_save($user))) {
+      throw new Exception(format_string('cannot save user with role @r', array('@r' => $role)));
+    }
+    $this->drupalLogin($user);
+  }
+
+}

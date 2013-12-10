@@ -1,0 +1,96 @@
+<?php
+
+function dcycle_deploy_install() {
+  for ($i = 7001; $i < 8000; $i++) {
+    $candidate = 'dcycle_deploy_update_' . $i;
+    if (function_exists($candidate)) {
+      $candidate();
+    }
+  }
+}
+
+/**
+ * Enable dcycle_feature
+ */
+function dcycle_deploy_update_7004() {
+  module_enable(array('dcycle_feature'));
+}
+
+/**
+ * Admin menu
+ */
+function dcycle_deploy_update_7007() {
+  module_enable(array('admin_menu_toolbar'));
+  module_disable(array('admin_menu'));
+}
+
+/**
+ * Admin menu take 2
+ */
+function dcycle_deploy_update_7008() {
+  module_enable(array('admin_menu_toolbar'));
+}
+
+/**
+ * Set maintenance mode
+ */
+function dcycle_deploy_update_7009() {
+  variable_set('maintenance_mode', 1);
+}
+
+/**
+ * Feature revert variable
+ */
+function dcycle_deploy_update_7011() {
+  features_revert(array('dcycle_feature' => array('variable')));
+}
+
+/**
+ * Disable toolbar
+ */
+function dcycle_deploy_update_7012() {
+  module_disable(array('toolbar'));
+}
+
+/**
+ * Markdown
+ */
+function dcycle_deploy_update_7013() {
+  module_enable(array('markdown'));
+}
+
+/**
+ * Feature revert variable
+ */
+function dcycle_deploy_update_7014() {
+  features_revert(array('dcycle_feature' => array('filter')));
+}
+
+/**
+ * Set dark_elegant as theme
+ */
+function dcycle_deploy_update_7015() {
+  theme_enable(array('dark_elegant'));
+  variable_set('theme_default', 'dark_elegant');
+}
+
+/**
+ * Site name
+ */
+function dcycle_deploy_update_7016() {
+  variable_set('site_name', 'Dcycle');
+}
+
+/**
+ * Site slogan
+ */
+function dcycle_deploy_update_7017() {
+  variable_set('site_slogan', 'A building code for Drupal.');
+}
+
+/**
+ * timeago
+ */
+function dcycle_deploy_update_7018() {
+  module_enable(array('timeago'));
+}

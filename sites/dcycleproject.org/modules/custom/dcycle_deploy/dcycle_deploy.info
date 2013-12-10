@@ -1,0 +1,9 @@
+name = Dcycle deploy
+description = Deploy the Dcycle website
+core = 7.x
+
+dependencies[] = dcycle_feature
+dependencies[] = markdown
+dependencies[] = timeago
+
+files[] = dcycle_deploy.test
