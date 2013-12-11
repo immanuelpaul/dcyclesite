@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Custom code for this website.
+ */
+
+/**
  * Implements hook_init().
  */
 function dcyclesite_init() {

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Initial and incremental deployment of this website.
+ */
+
+/**
+ * Implements hook_install().
+ */
 function dcycle_deploy_install() {
   for ($i = 7001; $i < 8000; $i++) {
     $candidate = 'dcycle_deploy_update_' . $i;
