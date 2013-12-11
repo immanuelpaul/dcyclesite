@@ -1,0 +1,3 @@
+name = Dcycle custom code
+description = Custom code for the dcycle site
+core = 7.x

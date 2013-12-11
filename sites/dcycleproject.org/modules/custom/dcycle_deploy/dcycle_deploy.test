@@ -4,6 +4,9 @@
  * This file contains the testing code for this module
  */
 
+// Test should run with this number of blog posts.
+define('DCYCLE_DEPLOY_TEST_BLOG_COUNT', 5);
+
 /**
  * The test case
  */
@@ -25,7 +28,7 @@ class dcyclesiteTestCase extends DrupalWebTestCase {
   public function setUp() {
     // set up a new site with default core modules, dcyclesite, and
     // dependencies.
-    parent::setUp('dcycle_deploy');
+    parent::setUp('dcycle_deploy', 'dcycle_feature');
   }
 
   /*
@@ -34,11 +37,19 @@ class dcyclesiteTestCase extends DrupalWebTestCase {
   public function testModule() {
     $this->loginAsRole('administrator');
     $blogs = array();
-    for ($i = 1; $i <= 5; $i++) {
+    for ($i = 1; $i <= DCYCLE_DEPLOY_TEST_BLOG_COUNT; $i++) {
       $this->drupalCreateNode(array('type' => 'article', 'title' => 'É' . $blogs[$i] = $this->randomName()));
       foreach (array('blog', 'node') as $base) {
-        $this->drupalGet($base . '/' . $i);
-        $this->assertUrl('blog/' . $i . '/e' . strtolower($blogs[$i]), array(), format_string('Blog can be accessed using @base/x and will redirect correctly.', array('@base' => $base)));
+        // passing alias => TRUE, otherwise, the test converts our call
+        // to the alias before the query.
+        $this->drupalGet($base . '/' . $i, array('alias' => TRUE));
+        // assertUrl() does not work here, because the current url (node/1)
+        // equals node/1 and equals also its alias. We want it to equal its
+        // alias only.
+        $url = $this->getUrl();
+        global $base_url;
+        $expected = $base_url . '/blog/' . $i . '/e' . strtolower($blogs[$i]);
+        $this->assertEqual($url, $expected , format_string('Blog can be accessed using @base/x and will redirect correctly because the end url (@url) is equal to @expected.', array('@base' => $base, '@url' => $url, '@expected' => $expected)));
       }
     }
   }

@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * Implements hook_init().
+ */
+function dcyclesite_init() {
+  if (arg(0) == 'blog' && is_numeric(arg(1)) && !(arg(2))) {
+    drupal_goto('node/' . arg(1));
+  }
+}

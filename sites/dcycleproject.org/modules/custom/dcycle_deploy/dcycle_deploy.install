@@ -10,13 +10,6 @@ function dcycle_deploy_install() {
 }
 
 /**
- * Enable dcycle_feature
- */
-function dcycle_deploy_update_7004() {
-  module_enable(array('dcycle_feature'));
-}
-
-/**
  * Admin menu
  */
 function dcycle_deploy_update_7007() {
@@ -32,20 +25,6 @@ function dcycle_deploy_update_7008() {
 }
 
 /**
- * Set maintenance mode
- */
-function dcycle_deploy_update_7009() {
-  variable_set('maintenance_mode', 1);
-}
-
-/**
- * Feature revert variable
- */
-function dcycle_deploy_update_7011() {
-  features_revert(array('dcycle_feature' => array('variable')));
-}
-
-/**
  * Disable toolbar
  */
 function dcycle_deploy_update_7012() {
@@ -57,13 +36,6 @@ function dcycle_deploy_update_7012() {
  */
 function dcycle_deploy_update_7013() {
   module_enable(array('markdown'));
-}
-
-/**
- * Feature revert variable
- */
-function dcycle_deploy_update_7014() {
-  features_revert(array('dcycle_feature' => array('filter')));
 }
 
 /**
@@ -101,4 +73,46 @@ function dcycle_deploy_update_7018() {
 function dcycle_deploy_update_7019() {
   // using pathauto for users, we end up with a WSOD during the test.
   variable_set('pathauto_user_pattern', '');
+}
+
+/**
+ * Enable dcycle_feature
+ */
+function dcycle_deploy_update_7021() {
+  module_enable(array('dcycle_feature'));
+}
+
+/**
+ * Enable some custom code
+ */
+function dcycle_deploy_update_7022() {
+  module_enable(array('dcyclesite'));
+}
+
+/**
+ * Pattern for articles
+ */
+function dcycle_deploy_update_7023() {
+  variable_set('pathauto_node_article_pattern', 'blog/[node:nid]/[node:title]');
+}
+
+/**
+ * Enable transliteration
+ */
+function dcycle_deploy_update_7024() {
+  module_enable(array('transliteration'));
+}
+
+/**
+ * transliterate pathauto
+ */
+function dcycle_deploy_update_7025() {
+  variable_set('pathauto_transliterate', TRUE);
+}
+
+/**
+ * Enable redirect and globalredirect
+ */
+function dcycle_deploy_update_7026() {
+  module_enable(array('redirect', 'globalredirect'));
 }
