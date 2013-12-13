@@ -55,20 +55,6 @@ function dcycle_deploy_update_7015() {
 }
 
 /**
- * Site name
- */
-function dcycle_deploy_update_7016() {
-  variable_set('site_name', 'Dcycle');
-}
-
-/**
- * Site slogan
- */
-function dcycle_deploy_update_7017() {
-  variable_set('site_slogan', 'A building code for Drupal.');
-}
-
-/**
  * timeago
  */
 function dcycle_deploy_update_7018() {
