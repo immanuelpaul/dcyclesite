@@ -28,7 +28,7 @@ class dcyclesiteTestCase extends DrupalWebTestCase {
   public function setUp() {
     // set up a new site with default core modules, dcyclesite, and
     // dependencies.
-    parent::setUp('dcycle_deploy', 'dcycle_feature');
+    parent::setUp('dcycle_deploy');
   }
 
   /*
