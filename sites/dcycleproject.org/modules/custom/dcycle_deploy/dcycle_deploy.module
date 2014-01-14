@@ -2,6 +2,22 @@
 
 /**
  * @file
- * Left empty on purpose.
+ * Test, deployment, and development functions for this site.
  */
- 
+
+/**
+ * Implements hook_node_presave().
+ *
+ * See https://drupal.org/node/1748302
+ */
+function dcycle_deploy_node_presave($node) {
+  if (isset($node->devel_generate)) {
+    $node->body[LANGUAGE_NONE][0]['format'] = 'markdown';
+    $node->body[LANGUAGE_NONE][0]['value'] =
+      $node->body[LANGUAGE_NONE][0]['value'] . PHP_EOL .
+      PHP_EOL .
+      'This is an h2 title' . PHP_EOL .
+      '-------------------';
+  }
+  return $node;
+}
