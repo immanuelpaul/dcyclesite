@@ -110,3 +110,22 @@ function dcycle_deploy_update_7025() {
 function dcycle_deploy_update_7026() {
   module_enable(array('redirect', 'globalredirect'));
 }
+
+/**
+ * #2 Remove search and user login blocks
+ */
+function dcycle_deploy_update_7031() {
+  // See https://github.com/alberto56/dcyclesite/issues/2
+  // See http://dcycleproject.org/blog/disabling-blocks
+  $mytheme = 'dark_elegant';
+  foreach (array('user' => 'login', 'search' => 'form') as $module => $delta) {
+    $num_updated = db_update('block') // Table name no longer needs {}
+      ->fields(array(
+        'region' => '-1',
+      ))
+      ->condition('module', $module, '=')
+      ->condition('delta', $delta, '=')
+      ->condition('theme', $mytheme, '=')
+      ->execute();
+  }
+}
