@@ -425,7 +425,7 @@ Move to separate stylesheet if invalid CSS is a problem.
 h1.site-name{
   font-weight: 900;
   color:#444;
-  font-size: 36px;
+  font-size: 42px;
   line-height:120%;
   margin:0px 0px;
 }
