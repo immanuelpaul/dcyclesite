@@ -1,0 +1,6 @@
+name = Dcycle devel
+description = Dcycle development code
+core = 7.x
+
+dependencies[] = realistic_dummy_content_api
+dependencies[] = simpletest

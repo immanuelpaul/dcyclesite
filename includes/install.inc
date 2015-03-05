@@ -420,7 +420,7 @@ abstract class DatabaseTasks {
       }
     }
     if (!empty($message)) {
-      $message = '<p>In order for Drupal to work, and to continue with the installation process, you must resolve all issues reported below. For more help with configuring your database server, see the <a href="http://drupal.org/getting-started/install">installation handbook</a>. If you are unsure what any of this means you should probably contact your hosting provider.</p>' . $message;
+      $message = 'Resolve all issues below to continue the installation. For help configuring your database server, see the <a href="http://drupal.org/getting-started/install">installation handbook</a>, or contact your hosting provider.' . $message;
       throw new DatabaseTaskException($message);
     }
   }
@@ -867,7 +867,7 @@ function drupal_verify_install_file($file, $mask = NULL, $type = 'file') {
             }
             break;
           case FILE_EXECUTABLE:
-            if (!drupal_is_executable($file) && !drupal_install_fix_file($file, $mask)) {
+            if (!is_executable($file) && !drupal_install_fix_file($file, $mask)) {
               $return = FALSE;
             }
             break;
@@ -882,7 +882,7 @@ function drupal_verify_install_file($file, $mask = NULL, $type = 'file') {
             }
             break;
           case FILE_NOT_EXECUTABLE:
-            if (drupal_is_executable($file) && !drupal_install_fix_file($file, $mask)) {
+            if (is_executable($file) && !drupal_install_fix_file($file, $mask)) {
               $return = FALSE;
             }
             break;
@@ -982,7 +982,7 @@ function drupal_install_fix_file($file, $mask, $message = TRUE) {
           }
           break;
         case FILE_EXECUTABLE:
-          if (!drupal_is_executable($file)) {
+          if (!is_executable($file)) {
             $mod |= 0111;
           }
           break;
@@ -997,7 +997,7 @@ function drupal_install_fix_file($file, $mask, $message = TRUE) {
           }
           break;
         case FILE_NOT_EXECUTABLE:
-          if (drupal_is_executable($file)) {
+          if (is_executable($file)) {
             $mod &= ~0111;
           }
           break;
@@ -1134,7 +1134,6 @@ function st($string, array $args = array(), array $options = array()) {
     }
   }
 
-  require_once DRUPAL_ROOT . '/includes/theme.inc';
   // Transform arguments before inserting them
   foreach ($args as $key => $value) {
     switch ($key[0]) {

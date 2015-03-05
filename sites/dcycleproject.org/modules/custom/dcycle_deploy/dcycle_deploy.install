@@ -21,29 +21,7 @@ function dcycle_deploy_install() {
  * Admin menu
  */
 function dcycle_deploy_update_7007() {
-  module_enable(array('admin_menu_toolbar'));
-  module_disable(array('admin_menu'));
-}
-
-/**
- * Admin menu take 2
- */
-function dcycle_deploy_update_7008() {
-  module_enable(array('admin_menu_toolbar'));
-}
-
-/**
- * Disable toolbar
- */
-function dcycle_deploy_update_7012() {
-  module_disable(array('toolbar'));
-}
-
-/**
- * Markdown
- */
-function dcycle_deploy_update_7013() {
-  module_enable(array('markdown'));
+  module_disable(array('admin_menu', 'toolbar'));
 }
 
 /**
@@ -55,32 +33,11 @@ function dcycle_deploy_update_7015() {
 }
 
 /**
- * timeago
- */
-function dcycle_deploy_update_7018() {
-  module_enable(array('timeago'));
-}
-
-/**
  * don't use pathauto for users
  */
 function dcycle_deploy_update_7019() {
   // using pathauto for users, we end up with a WSOD during the test.
   variable_set('pathauto_user_pattern', '');
-}
-
-/**
- * Enable dcycle_feature
- */
-function dcycle_deploy_update_7021() {
-  module_enable(array('dcycle_feature'));
-}
-
-/**
- * Enable some custom code
- */
-function dcycle_deploy_update_7022() {
-  module_enable(array('dcyclesite'));
 }
 
 /**
@@ -91,24 +48,10 @@ function dcycle_deploy_update_7023() {
 }
 
 /**
- * Enable transliteration
- */
-function dcycle_deploy_update_7024() {
-  module_enable(array('transliteration'));
-}
-
-/**
  * transliterate pathauto
  */
 function dcycle_deploy_update_7025() {
   variable_set('pathauto_transliterate', TRUE);
-}
-
-/**
- * Enable redirect and globalredirect
- */
-function dcycle_deploy_update_7026() {
-  module_enable(array('redirect', 'globalredirect'));
 }
 
 /**

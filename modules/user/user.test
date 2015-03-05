@@ -947,7 +947,7 @@ class UserPictureTestCase extends DrupalWebTestCase {
     $picture_path = $file_dir . $picture_dir;
 
     $pic_check = file_prepare_directory($picture_path, FILE_CREATE_DIRECTORY);
-    $this->_directory_test = file_directory_is_writable($picture_path);
+    $this->_directory_test = is_writable($picture_path);
     $this->assertTrue($this->_directory_test, "The directory $picture_path doesn't exist or is not writable. Further tests won't be made.");
   }
 
@@ -1127,6 +1127,17 @@ class UserPictureTestCase extends DrupalWebTestCase {
 
       $pic_path2 = $this->saveUserPicture($image);
       $this->assertNotEqual($pic_path, $pic_path2, 'Filename of second picture is different.');
+
+      // Check if user picture has a valid file ID after saving the user.
+      $account = user_load($this->user->uid, TRUE);
+      $this->assertTrue(is_object($account->picture), 'User picture object is valid after user load.');
+      $this->assertNotNull($account->picture->fid, 'User picture object has a FID after user load.');
+      $this->assertTrue(is_file($account->picture->uri), 'File is located in proper directory after user load.');
+      user_save($account);
+      // Verify that the user save does not destroy the user picture object.
+      $this->assertTrue(is_object($account->picture), 'User picture object is valid after user save.');
+      $this->assertNotNull($account->picture->fid, 'User picture object has a FID after user save.');
+      $this->assertTrue(is_file($account->picture->uri), 'File is located in proper directory after user save.');
     }
   }
 

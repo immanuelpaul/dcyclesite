@@ -1,0 +1,9 @@
+FROM alberto56/docker-drupal:latest
+
+ADD ./sites/all ./srv/drupal/www/sites/all
+ADD ./sites/dcycleproject.org/modules ./srv/drupal/www/sites/default/modules
+ADD ./sites/dcycleproject.org/themes ./srv/drupal/www/sites/default/themes
+RUN cd ./srv/drupal/www && /usr/bin/drush en dcycle_deploy dcycle_devel -y
+RUN cd ./srv/drupal/www && /usr/bin/drush uli
+
+EXPOSE 80
