@@ -2,8 +2,8 @@ name = Dcycle deploy
 description = Deploy the Dcycle website
 core = 7.x
 
-dependencies[] = admin_menu_toolbar
-dependencies[] = dcycle_feature
+;dependencies[] = admin_menu_toolbar
+;dependencies[] = dcycle_feature
 dependencies[] = markdown
 dependencies[] = timeago
 dependencies[] = dcyclesite

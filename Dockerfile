@@ -7,6 +7,7 @@ FROM alberto56/docker-drupal:latest
 ADD ./sites/all ./srv/drupal/www/sites/all
 ADD ./sites/dcycleproject.org/modules ./srv/drupal/www/sites/default/modules
 ADD ./sites/dcycleproject.org/themes ./srv/drupal/www/sites/default/themes
+RUN cd ./srv/drupal/www && /usr/bin/drush en admin_menu -y
 RUN cd ./srv/drupal/www && /usr/bin/drush en dcycle_deploy -y
 RUN cd ./srv/drupal/www && /usr/bin/drush en dcycle_devel -y
 RUN cd ./srv/drupal/www && wget https://www.drupal.org/files/drupal-simpletest-fails-to-drop-tables-sqlite-1713332-21.patch
